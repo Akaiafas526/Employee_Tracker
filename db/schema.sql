@@ -4,10 +4,9 @@ CREATE DATABASE employees;
 USE employees;
 
 CREATE TABLE department (
-  -- CREATE id, name COLUMNS
-  -- MAKE id AS PRIMARY KEY
-  -- TODO: YOUR CODE HERE
-
+  id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(50) NOT NULL,
+  PRIMARY KEY(id)
 );
 
 CREATE TABLE role (
