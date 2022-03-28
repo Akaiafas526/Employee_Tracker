@@ -1,12 +1,11 @@
 const connection = require("./connection");
 
 class DB {
-  // Keeping a reference to the connection on the class in case we need it later
   constructor(connection) {
     this.connection = connection;
   }
 
-  // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
+  // find employees method
   findAllEmployees() {
     return this.connection.query(
       `SELECT employee.id,first_name,last_name,department_name,salary
@@ -30,11 +29,9 @@ class DB {
   }
 
   // Update the given employee's role
+  // TODO:
   updateEmployeeRole(employeeId, roleId) {
-    return this.connection
-      .query
-      // TODO: YOUR CODE HERE
-      ();
+    return this.connection.query();
   }
 
   // Update the given employee's manager

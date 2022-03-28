@@ -121,17 +121,22 @@ async function viewEmployees() {
 
 async function viewEmployeesByDepartment() {
   const departments = await db.findAllDepartments();
-// console.log(departments)
+
   const departmentChoices = departments.map(({ id, name }) => ({
-    // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
-    // THE PROPERTY value SHOULD CONTAIN id.
-    // TODO: YOUR CODE HERE
+    const departments = await db.findAllDepartments();
+
+    const departmentChoices = departments.map (({id, name}) => ({
+      name: name,
+      value: id
+    }))
+
+
     
 
   }));
 
   const { departmentId } = await prompt([
-    // console.log(departmentId)
+    
     {
       type: "list",
       name: "departmentId",
