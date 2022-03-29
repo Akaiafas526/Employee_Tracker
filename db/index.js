@@ -5,7 +5,7 @@ class DB {
     this.connection = connection;
   }
 
-  // find employees method
+  // finds employees method
   findAllEmployees() {
     return this.connection.query(
       `SELECT employee.id,first_name,last_name,department_name,salary
@@ -15,7 +15,7 @@ class DB {
     );
   }
 
-  // Find all employees except the given employee id
+  // Finds all employees except the given employee id
   findAllPossibleManagers(employeeId) {
     return this.connection.query(
       "SELECT id, first_name, last_name FROM employee WHERE id != ?",
@@ -23,20 +23,19 @@ class DB {
     );
   }
 
-  // Create a new employee
+  // Creates a new employee
   createEmployee(employee) {
     return this.connection.query("INSERT INTO employee SET ?", employee);
   }
 
-  // Update the given employee's role
-  // TODO:
+  // Updates the given employee's role
   updateEmployeeRole(employeeId, rolesId) {
     return this.connection.query(
       "UPDATE employee SET roles_id = ? WHERE id = ?",
     [rolesId, employeeId]);
   }
 
-  // Update the given employee's manager
+  // Updates the given employee's manager
   updateEmployeeManager(employeeId, managerId) {
     return this.connection.query(
       "UPDATE employee SET manager_id = ? WHERE id = ?",
@@ -52,7 +51,7 @@ class DB {
     );
   }
 
-  // Create a new role
+  // Creates a new role
   createRole(roles) {
     return this.connection.query(
       "INSERT INTO roles SET ?", roles
@@ -69,7 +68,7 @@ class DB {
     );
   }
 
-  // Create a new department
+  // Creates a new department
   createDepartment(department) {
     return this.connection.query(
       "INSERT INTO department SET ?", department
