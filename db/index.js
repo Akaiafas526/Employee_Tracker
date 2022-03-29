@@ -46,8 +46,8 @@ class DB {
   // Find all roles, join with departments to display the department name
   findAllRoles() {
     return this.connection.query(
-      "Select roles.id, roles.title, roles.salary, department.name \
-      FROM role LEFT JOIN department On roles.department_id = department.id"
+      "Select roles.id, roles.title, roles.salary, department.department_name \
+      FROM roles LEFT JOIN department On roles.department_id = department.id"
     );
   }
 
@@ -61,10 +61,10 @@ class DB {
   // Find all departments, join with employees and roles and sum up utilized department budget
   findAllDepartments() {
     return this.connection.query(
-      "SELECT department.id, department.name, SUM(roles.salary) AS utilized_budget \
-      FROM department LEFT JOIN role ON roles.department_id = department.id \
+      "SELECT department.id, department.department_name, SUM(roles.salary) AS utilized_budget \
+      FROM department LEFT JOIN roles ON roles.department_id = department.id \
       LEFT JOIN employee ON employee.roles_id = roles.id \
-      GROUP BY department.id, department.name"
+      GROUP BY department.id, department.department_name"
     );
   }
 
@@ -78,10 +78,10 @@ class DB {
   // Find all employees in a given department, join with roles to display role titles
   findAllEmployeesByDepartment(departmentId) {
     return this.connection.query(
-      "SELECT employee.id, employee.first_name, employee.last_name, role.title \
+      "SELECT employee.id, employee.first_name, employee.last_name, roles.title \
       FROM employee \
-      LEFT JOIN role on employee.role_id = role.id \
-      LEFT JOIN department department on role.department_id = department.id \
+      LEFT JOIN roles on employee.roles_id = roles.id \
+      LEFT JOIN department department on roles.department_id = department.id \
       WHERE department.id = ?;",
       departmentId
     );
@@ -91,7 +91,7 @@ class DB {
   findAllEmployeesByManager(managerId) {
     return this.connection.query(
       "SELECT employee.id, employee.first_name, employee.last_name FROM employee \
-      LEFT JOIN roles ON employee.role_id = role.id \
+      LEFT JOIN roles ON employee.roles_id = roles.id \
       LEFT JOIN department ON roles.department_id = department.id \
       WHERE manager.id = ?",
       managerId

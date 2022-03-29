@@ -27,11 +27,6 @@ async function loadMainPrompts() {
           value: "VIEW_EMPLOYEES",
         },
         {
-          name: "View All Employees By Department",
-          value: "VIEW_EMPLOYEES_BY_DEPARTMENT",
-        },
-
-        {
           name: "Add Employee",
           value: "ADD_EMPLOYEE",
         },
@@ -71,8 +66,6 @@ async function loadMainPrompts() {
   switch (choice) {
     case "VIEW_EMPLOYEES":
       return viewEmployees();
-    case "VIEW_EMPLOYEES_BY_DEPARTMENT":
-      return viewEmployeesByDepartment();
     case "ADD_EMPLOYEE":
       return addEmployee();
     case "UPDATE_EMPLOYEE_ROLE":
@@ -217,14 +210,14 @@ async function viewDepartments() {
 async function addDepartment() {
   const department = await prompt([
     {
-      name: "name",
+      name: "department_name",
       message: "What is the name of the department?",
     },
   ]);
 
   await db.createDepartment(department);
 
-  console.log(`Added ${department.name} to the database`);
+  console.log(`Added ${department.department_name} to the database`);
 
   loadMainPrompts();
 }
@@ -249,14 +242,14 @@ async function addEmployee() {
     value: id,
   }));
 
-  const { roleId } = await prompt({
+  const { rolesId } = await prompt({
     type: "list",
-    name: "roleId",
+    name: "rolesId",
     message: "What is the employee's role?",
     choices: roleChoices,
   });
 
-  employee.role_id = roleId;
+  employee.roles_id = rolesId;
 
   const managerChoices = employees.map(({ id, first_name, last_name }) => ({
     name: first_name + " " + last_name,
