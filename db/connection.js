@@ -19,7 +19,7 @@ connection.connect(error => {
 
 
 //Using a promise
-// allowing the use the async/await syntax
+// allowing the use of async/await syntax
 connection.query = util.promisify(connection.query);
 
 module.exports = connection;
