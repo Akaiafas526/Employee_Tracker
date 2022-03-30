@@ -43,7 +43,7 @@ class DB {
     );
   }
 
-  // Find all roles, join with departments to display the department name
+  // Finds all roles
   findAllRoles() {
     return this.connection.query(
       "Select roles.id, roles.title, roles.salary, department.department_name \
@@ -58,7 +58,7 @@ class DB {
     );
   }
 
-  // Find all departments, join with employees and roles and sum up utilized department budget
+  // Finds all departments, join with employees and roles and sum up utilized department budget
   findAllDepartments() {
     return this.connection.query(
       "SELECT department.id, department.department_name, SUM(roles.salary) AS utilized_budget \
@@ -75,7 +75,7 @@ class DB {
     );
   }
 
-  // Find all employees in a given department, join with roles to display role titles
+  // Finds all employees in a given department, then joins with roles to display role titles
   findAllEmployeesByDepartment(departmentId) {
     return this.connection.query(
       "SELECT employee.id, employee.first_name, employee.last_name, roles.title \
@@ -87,7 +87,7 @@ class DB {
     );
   }
 
-  // Find all employees by manager, join with departments and roles to display titles and department names
+  // Finds all employees by manager, joins with departments and roles to display titles and department names
   findAllEmployeesByManager(managerId) {
     return this.connection.query(
       "SELECT employee.id, employee.first_name, employee.last_name FROM employee \
